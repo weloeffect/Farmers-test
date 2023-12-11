@@ -1,0 +1,35 @@
+import os
+from typing import Final
+from dotenv import load_dotenv
+from telegram import *
+from telegram.ext import *
+from requests import *
+load_dotenv()
+
+BOT_TOKEN : Final = os.environ.get('BOT_TOKEN')
+BOT_USERNAME: Final = "@farmers101_bot"
+
+print(BOT_TOKEN)
+
+enterDate = "Enter Date"
+enterDay = "Enter Day"
+async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # await update.message.reply_text("how can i help you please?")
+    # await update.message.reply_text("how can i help you please2?")
+    # print(update.message.text)
+    # print(update.effective_chat.username)
+    buttons = [[KeyboardButton(enterDate)], [KeyboardButton(enterDay)]]
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Welcome to my bots", reply_markup=ReplyKeyboardMarkup(buttons))
+
+# async def messageHandler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+   
+
+
+
+if __name__ == "__main__":
+    print("Starting Bot....")
+    app = Application.builder().token(BOT_TOKEN).build()
+    app.add_handler(CommandHandler('start', start_cmd))
+    app.add_handler(MessageHandler(filters.Text, messageHandler))
+    print("polling")
+    app.run_polling(poll_interval=5)
