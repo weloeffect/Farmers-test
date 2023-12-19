@@ -7,7 +7,8 @@ import requests
 load_dotenv()
 
 BOT_TOKEN  = os.environ.get('BOT_TOKEN')
-BASE_URL  = os.environ.get('BASE_URL')
+# BASE_URL  = os.environ.get('BASE_URL')
+BASE_URL  = "https://farmersbot.onrender.com/"
 
 
 bot = telebot.TeleBot(BOT_TOKEN)
